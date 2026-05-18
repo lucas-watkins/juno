@@ -9,7 +9,7 @@ namespace juno {
     class module {
         public:
         // Command registration
-        virtual void register_command(dpp::cluster& cluster) const = 0;
+        virtual dpp::slashcommand make_command(dpp::cluster& cluster) const = 0;
         virtual void on_command_execution(const dpp::slashcommand_t& event) const = 0;
 
         virtual std::string name() const = 0;

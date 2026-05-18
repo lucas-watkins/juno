@@ -4,6 +4,7 @@
 #include <config.hpp>
 #include <vector>
 #include <ping.hpp>
+#include <qalc.hpp>
 
 int main() {
     std::string token{};
@@ -26,7 +27,8 @@ int main() {
 
     // The modules that will be utilized for the bot
     std::vector<juno::module*> modules{
-        &juno::ping::instance
+        &juno::ping::instance,
+        &juno::qalc::instance
     };
 
     cluster.on_slashcommand([&](const dpp::slashcommand_t& event) {
@@ -39,11 +41,32 @@ int main() {
 
     cluster.on_ready([&](const dpp::ready_t& ready) {
         if (dpp::run_once<class register_bot_cmds>()) {
+
+            // Remove all previous slash commands to avoid ghost commands
+            //cluster.global_bulk_command_delete();
+
+            std::vector<dpp::slashcommand> commands{};
+            commands.reserve(modules.size());
+
+
             for (const auto& module : modules) {
-                module->register_command(cluster);
+                commands.emplace_back(module->make_command(cluster));
             }
+
+            cluster.global_bulk_command_create(commands);
+
+            std::cout << commands.size() << " modules loaded (";
+            for (int i {0}; i < commands.size(); ++i) {
+                std::cout << modules[i]->name();
+                if (i < commands.size() - 1) {
+                    std::cout << ", ";
+                }
+            }
+            std::cout << ")\n";
         }
     });
+
+    std::cout << "Starting...\n";
 
     cluster.start(dpp::st_wait);
 
