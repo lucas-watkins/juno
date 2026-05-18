@@ -24,7 +24,9 @@ FetchContent_MakeAvailable(DPP)
 pkg_check_modules(LIBQALCULATE REQUIRED libqalculate)
 
 # Copy config.json over for convenience
-file(COPY "config.json" DESTINATION .)
+if (EXISTS "config.json")
+    file(COPY "config.json" DESTINATION .)
+endif()
 
 add_executable(
         juno
