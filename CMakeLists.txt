@@ -4,7 +4,7 @@ project(juno)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -fsanitize=address -fsanitize=leak -fsanitize=undefined")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -fsanitize=address -fsanitize=leak")
 
 # Declare DPP
 FetchContent_Declare(
@@ -13,19 +13,20 @@ FetchContent_Declare(
     GIT_TAG v10.1.4
 )
 
-# Static DPP library
+# Static libraries
 set(BUILD_SHARED_LIBS OFF)
 
-# Make DPP Available
+# Make DPP and Qalculate Available
 FetchContent_MakeAvailable(DPP)
-
-# END DPP
-set(BUILD_SHARED_LIBS ON)
 
 # Copy config.json over for convenience
 file(COPY "config.json" DESTINATION .)
 
-add_executable(juno "src/main.cpp")
+add_executable(
+        juno
+        "src/main.cpp"
+        "src/ping.cpp"
+)
 
 target_include_directories(juno PRIVATE "${dpp_SOURCE_DIR}/include" "include")
 target_link_libraries(juno dppstatic)
