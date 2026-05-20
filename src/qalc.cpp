@@ -13,7 +13,7 @@ void juno::qalc::on_command_execution(const dpp::slashcommand_t& event) const {
 
     PrintOptions print_options{};
 
-    print_options.use_unicode_signs = UNICODE_SIGNS_ON;
+    print_options.use_unicode_signs = UNICODE_SIGNS_ONLY_UNIT_EXPONENTS;
     print_options.use_unit_prefixes = false;
     print_options.interval_display = IntervalDisplay::INTERVAL_DISPLAY_MIDPOINT;
     print_options.number_fraction_format = NumberFractionFormat::FRACTION_FRACTIONAL;
