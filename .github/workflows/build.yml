@@ -24,4 +24,4 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: "juno"
-          path: "juno"
+          path: "cmake-build-release/juno"
