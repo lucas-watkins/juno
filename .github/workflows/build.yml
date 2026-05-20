@@ -10,10 +10,10 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          sudo apt-get update
+          sudo apt-get install -y libqalculate23 libopus0
           curl -o dpp.deb https://dl.dpp.dev
           sudo dpkg -i dpp.deb
-          sudo apt-get update
-          sudo apt-get install -y libqalculate23
 
       - name: Release Build With Cmake
         run: |
