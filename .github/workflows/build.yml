@@ -11,7 +11,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libqalculate-dev
+          sudo apt-get install -y libqalculate23
 
       - name: Release Build With Cmake
         run: |

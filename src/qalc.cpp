@@ -2,14 +2,14 @@
 #include <util.hpp>
 
 dpp::slashcommand juno::qalc::make_command(dpp::cluster& cluster) const {
-    return dpp::slashcommand{name(), "Use libqalculate!", cluster.me.id}
+    return dpp::slashcommand{ name(), "Use libqalculate!", cluster.me.id }
         .add_option(
             dpp::command_option(dpp::co_string, "expr", "Expression to qalculate", true)
         );
 }
 
 void juno::qalc::on_command_execution(const dpp::slashcommand_t& event) const {
-    const std::string expr{std::get<std::string>(event.get_parameter("expr"))};
+    const std::string expr{ std::get<std::string>(event.get_parameter("expr")) };
 
     PrintOptions print_options{};
 
@@ -21,21 +21,21 @@ void juno::qalc::on_command_execution(const dpp::slashcommand_t& event) const {
     EvaluationOptions evaluation_options{};
     evaluation_options.interval_calculation = IntervalCalculation::INTERVAL_CALCULATION_NONE;
 
+    std::string result{ m_calculator->calculateAndPrint(expr, 10000, evaluation_options, print_options) };
+
     const dpp::embed reply = dpp::embed{}
                              .set_color(dpp::colors::raspberry)
                              .set_title("Qalculate!")
                              .add_field(
                                  "Input:",
-                                 util::to_codeblock(expr)
+                                 util::to_codeblock(expr.substr(0, 1022))
                              )
                              .add_field(
                                  "Output:",
-                                 util::to_codeblock(
-                                     m_calculator->calculateAndPrint(expr, 10000, evaluation_options, print_options)
-                                 )
+                                 util::to_codeblock(result.substr(0, 1022)) // substr to ensure 1024 char lim
                              );
 
-    const dpp::message msg{event.command.channel_id, reply};
+    const dpp::message msg{ event.command.channel_id, reply };
 
     event.reply(msg);
 }
