@@ -41,7 +41,17 @@ int main() {
 
         for (const auto& module : modules) {
             if (event.command.get_command_name() == module->name()) {
-                module->on_command_execution(event);
+                try {
+                    module->on_command_execution(event);
+                } catch (const std::exception& ex) {
+                    juno::log << juno::logging::loglevel::error << " Exception Occurred!: " << ex.what() << '\n';
+
+                    dpp::embed embed = dpp::embed{}
+                                       .set_title(">˷< Exception Occurred!")
+                                       .add_field("Details", ex.what());
+
+                    event.reply(embed);
+                }
             }
         }
     });
