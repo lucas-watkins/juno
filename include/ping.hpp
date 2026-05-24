@@ -5,7 +5,7 @@
 
 namespace juno {
     class ping : public easy_module<ping> {
-        std::string name() const override {
+        constexpr std::string name() const override {
             return "ping";
         }
 

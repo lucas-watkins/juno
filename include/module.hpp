@@ -12,7 +12,7 @@ namespace juno {
         virtual dpp::slashcommand make_command(dpp::cluster& cluster) const = 0;
         virtual void on_command_execution(const dpp::slashcommand_t& event) const = 0;
 
-        virtual std::string name() const = 0;
+        constexpr virtual std::string name() const = 0;
 
         virtual ~module() = default;
     };

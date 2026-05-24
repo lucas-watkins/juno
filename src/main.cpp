@@ -20,7 +20,6 @@ int main() {
         juno::config config{ json_config.get<juno::config>() };
 
         token = config.token();
-
     } catch (const std::exception& e) {
         std::cerr << "Retrieval of config failed: " << e.what() << '\n';
 
@@ -48,7 +47,8 @@ int main() {
 
                     dpp::embed embed = dpp::embed{}
                                        .set_title(">˷< Exception Occurred!")
-                                       .add_field("Details", ex.what());
+                                       .add_field("Details", ex.what())
+                                       .set_color(dpp::colors::red_blood);
 
                     event.reply(embed);
                 }
@@ -58,7 +58,6 @@ int main() {
 
     cluster.on_ready([&](const dpp::ready_t& ready) {
         if (dpp::run_once<class register_bot_cmds>()) {
-
             // Remove all previous slash commands to avoid ghost commands
             //cluster.guild_bulk_command_delete(1504533559212249179); // Juno Testing Arena server ID
 
@@ -73,7 +72,7 @@ int main() {
             cluster.global_bulk_command_create(commands);
 
             std::cout << commands.size() << " modules loaded (";
-            for (int i {0}; i < commands.size(); ++i) {
+            for (int i{ 0 }; i < commands.size(); ++i) {
                 std::cout << modules[i]->name();
                 if (i < commands.size() - 1) {
                     std::cout << ", ";
