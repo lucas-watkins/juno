@@ -9,10 +9,7 @@
 namespace juno::util {
 
     inline std::string to_codeblock(const std::string& str) {
-        std::stringstream ss{};
-        ss << std::quoted(str, '`');
-
-        return ss.str();
+        return std::format("\"{}\"", str);
     }
 
     /*
