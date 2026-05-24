@@ -8,7 +8,7 @@ dpp::slashcommand juno::qalc::make_command(dpp::cluster& cluster) const {
         );
 }
 
-void juno::qalc::on_command_execution(const dpp::slashcommand_t& event) const {
+void juno::qalc::on_command_execution(const dpp::slashcommand_t& event, const dpp::cluster& cluster) const {
     const std::string expr{ std::get<std::string>(event.get_parameter("expr")) };
 
     PrintOptions print_options{};
