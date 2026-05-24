@@ -23,7 +23,6 @@ void juno::qalc::on_command_execution(const dpp::slashcommand_t& event) const {
     std::string result{ m_calculator->calculateAndPrint(expr, 10000, evaluation_options, print_options) };
 
     const dpp::embed reply = dpp::embed{}
-                             .set_color(dpp::colors::raspberry)
                              .set_title("Qalculate!")
                              .add_field(
                                  "Input:",
