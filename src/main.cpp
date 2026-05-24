@@ -7,6 +7,7 @@
 #include <vector>
 #include <ping.hpp>
 #include <qalc.hpp>
+#include <cat.hpp>
 #include <util.hpp>
 #include <logging.hpp>
 
@@ -31,7 +32,8 @@ int main() {
     // The modules that will be utilized for the bot
     std::vector<juno::module*> modules{
         &juno::ping::instance,
-        &juno::qalc::instance
+        &juno::qalc::instance,
+        &juno::cat::instance
     };
 
     cluster.on_slashcommand([&](const dpp::slashcommand_t& event) {

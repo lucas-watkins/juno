@@ -24,6 +24,7 @@ add_executable(
         "src/ping.cpp"
         "src/qalc.cpp"
         "src/logging.cpp"
+        "src/cat.cpp"
 )
 
 target_include_directories(juno PRIVATE ${DPP_INCLUDE_DIRS} ${LIBQALCULATE_INCLUDE_DIRS} "include")
