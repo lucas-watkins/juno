@@ -9,7 +9,7 @@
 namespace juno::util {
 
     inline std::string to_codeblock(const std::string& str) {
-        return std::format("\"{}\"", str);
+        return std::format("`{}`", str);
     }
 
     /*
