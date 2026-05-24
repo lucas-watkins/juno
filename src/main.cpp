@@ -41,7 +41,7 @@ int main() {
         for (const auto& module : modules) {
             if (event.command.get_command_name() == module->name()) {
                 try {
-                    module->on_command_execution(event);
+                    module->on_command_execution(event, cluster);
                 } catch (const std::exception& ex) {
                     juno::log << juno::logging::loglevel::error << " Exception Occurred!: " << ex.what() << '\n';
 

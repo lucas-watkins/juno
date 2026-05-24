@@ -10,7 +10,7 @@ namespace juno {
         public:
         // Command registration
         virtual dpp::slashcommand make_command(dpp::cluster& cluster) const = 0;
-        virtual void on_command_execution(const dpp::slashcommand_t& event, const dpp::cluster& cluster) const = 0;
+        virtual void on_command_execution(const dpp::slashcommand_t& event, dpp::cluster& cluster) const = 0;
 
         constexpr virtual std::string name() const = 0;
 
