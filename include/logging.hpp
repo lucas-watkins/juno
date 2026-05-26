@@ -40,7 +40,7 @@ namespace juno {
         const dpp::interaction& cmd{ event.command };
         std::cout << cmd.get_issuing_user().format_username() << " used " << cmd.get_command_name();
 
-        if (const auto& opts{ cmd.get_command_interaction().options }; !opts.empty()) {
+        if (const auto opts{ cmd.get_command_interaction().options }; !opts.empty()) {
             std::cout << " with options: \n";
 
             for (const auto& option : opts) {
