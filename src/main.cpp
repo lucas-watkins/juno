@@ -64,11 +64,17 @@ int main() {
             //cluster.guild_bulk_command_delete(1504533559212249179); // Juno Testing Arena server ID
 
             std::vector<dpp::slashcommand> commands{};
-            commands.reserve(modules.size());
+            commands.reserve(modules.size()); // approx guess
 
 
             for (const auto& module : modules) {
-                commands.emplace_back(module->make_command(cluster));
+                const juno::module::registration_result r{ module->make_command(cluster) };
+
+                if (r.holds<dpp::slashcommand>()) {
+                    commands.push_back(r.get<dpp::slashcommand>());
+                } else {
+                    commands.insert_range(commands.cend(), r.get<std::vector<dpp::slashcommand>>());
+                }
             }
 
             cluster.global_bulk_command_create(commands);

@@ -10,12 +10,11 @@
 #include <util.hpp>
 
 namespace juno {
-
     // Juno's logging always goes to standard output
     class logging {
         static std::string time();
 
-        public:
+    public:
         enum class loglevel {
             debug,
             info,
@@ -65,24 +64,24 @@ namespace juno {
         std::cout << '[' << juno::logging::time() << ' ';
 
         switch (lv) {
-            case logging::loglevel::debug:
+        case logging::loglevel::debug:
             std::cout << "DBG";
             break;
 
-            case logging::loglevel::info:
+        case logging::loglevel::info:
             std::cout << "INF";
             break;
 
-            case logging::loglevel::warning:
+        case logging::loglevel::warning:
             std::cout << "WRN";
             break;
 
-            case logging::loglevel::error:
+        case logging::loglevel::error:
             std::cout << "ERR";
             break;
 
-            // Shouldn't happen
-            default:
+        // Shouldn't happen
+        default:
             std::cout << "UNK";
             break;
         }
@@ -91,8 +90,6 @@ namespace juno {
 
         return l;
     }
-
-
 }
 
 #endif //JUNO_LOGGING_HPP

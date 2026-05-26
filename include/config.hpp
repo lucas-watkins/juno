@@ -5,7 +5,6 @@
 #include <dpp/nlohmann/json.hpp>
 
 namespace juno {
-
     /*
      * Class to manage configuration.
      * Construction is forbidden, get from nlohmann JSON instead.
@@ -16,12 +15,12 @@ namespace juno {
         friend void to_json(nlohmann::json& j, const config& c);
         friend void from_json(const nlohmann::json& j, config& c);
 
-        public:
+    public:
         const std::string& token() const { return m_token; }
     };
 
     inline void to_json(nlohmann::json& j, const config& c) {
-        j = nlohmann::json{{ "token", c.token() }};
+        j = nlohmann::json{ { "token", c.token() } };
     }
 
     inline void from_json(const nlohmann::json& j, config& c) {
