@@ -1,6 +1,6 @@
 #include <ping.hpp>
 
-juno::module::registration_result juno::ping::make_command(dpp::cluster& cluster) const {
+dpp::slashcommand juno::ping::make_command(dpp::cluster& cluster) const {
     return dpp::slashcommand{ name(), "Replies with \"Pong!\"", cluster.me.id };
 }
 

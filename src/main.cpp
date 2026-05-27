@@ -47,12 +47,7 @@ int main() {
                 } catch (const std::exception& ex) {
                     juno::log << juno::logging::loglevel::error << " Exception Occurred!: " << ex.what() << '\n';
 
-                    dpp::embed embed = dpp::embed{}
-                                       .set_title(">˷< Exception Occurred!")
-                                       .add_field("Details", ex.what())
-                                       .set_color(dpp::colors::red_blood);
-
-                    event.reply(embed);
+                    event.reply(juno::util::error_embed("Exception Occurred!", ex.what()));
                 }
             }
         }
@@ -68,21 +63,16 @@ int main() {
 
 
             for (const auto& module : modules) {
-                const juno::module::registration_result r{ module->make_command(cluster) };
-
-                if (r.holds<dpp::slashcommand>()) {
-                    commands.push_back(r.get<dpp::slashcommand>());
-                } else {
-                    commands.insert_range(commands.cend(), r.get<std::vector<dpp::slashcommand>>());
-                }
+                commands.emplace_back(module->make_command(cluster));
             }
 
             cluster.global_bulk_command_create(commands);
+            //cluster.guild_bulk_command_create(commands, 1504533559212249179);
 
-            std::cout << commands.size() << " modules loaded (";
-            for (int i{ 0 }; i < commands.size(); ++i) {
+            std::cout << modules.size() << " modules loaded (";
+            for (int i{ 0 }; i < modules.size(); ++i) {
                 std::cout << modules[i]->name();
-                if (i < commands.size() - 1) {
+                if (i < modules.size() - 1) {
                     std::cout << ", ";
                 }
             }

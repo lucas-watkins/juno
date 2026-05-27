@@ -1,7 +1,7 @@
 #include <qalc.hpp>
 #include <util.hpp>
 
-juno::module::registration_result juno::qalc::make_command(dpp::cluster& cluster) const {
+dpp::slashcommand juno::qalc::make_command(dpp::cluster& cluster) const {
     return dpp::slashcommand{ name(), "Use libqalculate!", cluster.me.id }
         .add_option(
             dpp::command_option(dpp::co_string, "expr", "Expression to qalculate", true)
