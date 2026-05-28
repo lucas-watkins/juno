@@ -29,7 +29,7 @@ void juno::qalc::on_command_execution(const dpp::slashcommand_t& event, dpp::clu
                                  util::to_codeblock(expr.substr(0, 1022))
                              )
                              .add_field(
-                                 "Output:",
+                                 result.size() < 1022 ? "Output:" : "Output (truncated):",
                                  util::to_codeblock(result.substr(0, 1022)) // substr to ensure 1024 char lim
                              );
 
