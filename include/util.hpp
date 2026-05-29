@@ -3,8 +3,8 @@
 
 #include <string>
 #include <sstream>
-#include <iomanip>
 #include <optional>
+#include <logging.hpp>
 
 namespace juno::util {
     // To Markdown codeblock
@@ -35,7 +35,11 @@ namespace juno::util {
         return std::nullopt;
     }
 
-    inline dpp::embed error_embed(const std::string_view title, const std::string_view message) {
+    // Creates an error embed with the specified parameters **AND** logs error to console
+    inline dpp::embed log_and_error_embed(const std::string_view title, const std::string_view message) {
+
+        juno::log << logging::loglevel::error << ' ' << title << ": " << message << '\n';
+
         return dpp::embed{}
                .set_title(title)
                .add_field("Details", message)

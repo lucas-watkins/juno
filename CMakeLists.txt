@@ -5,7 +5,7 @@ project(juno)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -fsanitize=address -fsanitize=leak")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -fsanitize=address -fsanitize=leak -fsanitize=undefined")
 
 # Find libqalculate (needs to be installed on system)
 pkg_check_modules(LIBQALCULATE REQUIRED libqalculate)
@@ -25,6 +25,7 @@ add_executable(
         "src/qalc.cpp"
         "src/logging.cpp"
         "src/cat.cpp"
+        "src/deadlockversion.cpp"
 )
 
 target_include_directories(juno PRIVATE ${DPP_INCLUDE_DIRS} ${LIBQALCULATE_INCLUDE_DIRS} "include")

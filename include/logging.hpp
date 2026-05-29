@@ -7,9 +7,14 @@
 
 #include <optional>
 #include <dpp/dpp.h>
-#include <util.hpp>
 
 namespace juno {
+    // Forward declaration
+    namespace util {
+        template <typename... Ts>
+        std::optional<std::string> variant_to_string(const std::variant<Ts...>& v);
+    }
+
     // Juno's logging always goes to standard output
     class logging {
         static std::string time();

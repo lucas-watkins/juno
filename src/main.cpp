@@ -1,15 +1,17 @@
 #include <iostream>
 #include <ctime>
 #include <cstdint>
+#include <vector>
 #include <dpp/dpp.h>
 #include <dpp/nlohmann/json.hpp>
 #include <config.hpp>
-#include <vector>
+#include <util.hpp>
+#include <logging.hpp>
 #include <ping.hpp>
 #include <qalc.hpp>
 #include <cat.hpp>
-#include <util.hpp>
-#include <logging.hpp>
+#include <deadlockversion.hpp>
+
 
 int main() {
     std::string token{};
@@ -33,7 +35,8 @@ int main() {
     std::vector<juno::module*> modules{
         &juno::ping::instance,
         &juno::qalc::instance,
-        &juno::cat::instance
+        &juno::cat::instance,
+        &juno::deadlockversion::instance
     };
 
     cluster.on_slashcommand([&](const dpp::slashcommand_t& event) {
@@ -45,9 +48,7 @@ int main() {
                 try {
                     module->on_command_execution(event, cluster);
                 } catch (const std::exception& ex) {
-                    juno::log << juno::logging::loglevel::error << " Exception Occurred!: " << ex.what() << '\n';
-
-                    event.reply(juno::util::error_embed("Exception Occurred!", ex.what()));
+                    event.reply(juno::util::log_and_error_embed("Exception Occurred!", ex.what()));
                 }
             }
         }
