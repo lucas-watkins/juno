@@ -59,6 +59,8 @@ int main() {
             // Remove all previous slash commands to avoid ghost commands
             //cluster.guild_bulk_command_delete(1504533559212249179); // Juno Testing Arena server ID
 
+            juno::log << juno::logging::loglevel::info << " Connected to Discord\n";
+
             std::vector<dpp::slashcommand> commands{};
             commands.reserve(modules.size()); // approx guess
 
@@ -70,18 +72,18 @@ int main() {
             cluster.global_bulk_command_create(commands);
             //cluster.guild_bulk_command_create(commands, 1504533559212249179);
 
-            std::cout << modules.size() << " modules loaded (";
+            juno::log << juno::logging::loglevel::info << ' ' << modules.size() << " modules loaded (";
             for (int i{ 0 }; i < modules.size(); ++i) {
-                std::cout << modules[i]->name();
+                juno::log << modules[i]->name();
                 if (i < modules.size() - 1) {
-                    std::cout << ", ";
+                    juno::log << ", ";
                 }
             }
-            std::cout << ")\n";
+            juno::log << ")\n";
         }
     });
 
-    std::cout << "Starting...\n";
+    juno::log << juno::logging::loglevel::info <<  " Starting...\n";
 
     cluster.start(dpp::st_wait);
 
