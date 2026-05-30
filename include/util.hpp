@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <optional>
+#include <random>
 #include <logging.hpp>
 
 namespace juno::util {
@@ -47,6 +48,18 @@ namespace juno::util {
                .set_thumbnail(
                    "https://media.discordapp.net/attachments/763092900972068888/1509036791502733454/juno_error.png"
                 );
+    }
+
+    // Returns random integer N given A and B with A <= N <= B
+    inline int randint(const int min, const int max) {
+        // Mersenne twister
+        static std::random_device rd{};
+        static std::seed_seq seed{rd(), rd(), rd(), rd(), rd()};
+        static std::mt19937 gen{seed};
+
+        std::uniform_int_distribution dist{ min, max };
+
+        return dist(gen);
     }
 }
 
