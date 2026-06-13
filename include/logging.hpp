@@ -43,7 +43,8 @@ namespace juno {
     template <>
     inline const juno::logging& operator<<(const juno::logging& l, const dpp::slashcommand_t& event) {
         const dpp::interaction& cmd{ event.command };
-        std::cout << cmd.get_issuing_user().format_username() << " used " << cmd.get_command_name();
+        const dpp::user& cmd_issuer{ cmd.get_issuing_user() };
+        std::cout << cmd_issuer.username << " (" << cmd_issuer.id << ")" << " used " << cmd.get_command_name();
 
         if (const auto opts{ cmd.get_command_interaction().options }; !opts.empty()) {
             std::cout << " with options: \n";
