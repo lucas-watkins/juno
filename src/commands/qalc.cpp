@@ -1,4 +1,4 @@
-#include <qalc.hpp>
+#include <commands/qalc.hpp>
 #include <util.hpp>
 
 dpp::slashcommand juno::qalc::make_command(dpp::cluster& cluster) const {

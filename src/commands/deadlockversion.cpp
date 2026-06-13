@@ -1,5 +1,5 @@
 #include <nlohmann/json.hpp>
-#include <deadlockversion.hpp>
+#include <commands/deadlockversion.hpp>
 #include <util.hpp>
 
 dpp::slashcommand juno::deadlockversion::make_command(dpp::cluster& cluster) const {

@@ -1,4 +1,4 @@
-#include <ping.hpp>
+#include <commands/ping.hpp>
 
 dpp::slashcommand juno::ping::make_command(dpp::cluster& cluster) const {
     return dpp::slashcommand{ name(), "Replies with \"Pong!\"", cluster.me.id };

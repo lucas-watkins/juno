@@ -1,4 +1,4 @@
-#include <cat.hpp>
+#include <commands/cat.hpp>
 #include <util.hpp>
 #include <logging.hpp>
 
