@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <memory>
 #include <dpp/dpp.h>
 #include <dpp/nlohmann/json.hpp>
 #include <config.hpp>
@@ -30,12 +31,12 @@ int main() {
     dpp::cluster cluster{ token };
 
     // The modules that will be utilized for the bot
-    std::vector<juno::command*> cmds{
-        &juno::ping::instance,
-        &juno::qalc::instance,
-        &juno::cat::instance,
-        &juno::deadlockversion::instance
-    };
+    std::vector<std::unique_ptr<juno::command>> cmds;
+
+    cmds.push_back(std::make_unique<juno::ping>());
+    cmds.push_back(std::make_unique<juno::qalc>());
+    cmds.push_back(std::make_unique<juno::cat>());
+    cmds.push_back(std::make_unique<juno::deadlockversion>());
 
     cluster.on_slashcommand([&](const dpp::slashcommand_t& event) {
         juno::log << juno::logging::loglevel::info << ' ' << event << '\n';

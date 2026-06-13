@@ -8,7 +8,7 @@
 #include <command.hpp>
 
 namespace juno {
-    class deadlockversion : public easy_command<deadlockversion> {
+    class deadlockversion : public command {
     public:
         constexpr std::string name() const override {
             return "deadlockversion";

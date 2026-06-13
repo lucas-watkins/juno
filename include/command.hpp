@@ -16,13 +16,6 @@ namespace juno {
 
         virtual ~command() = default;
     };
-
-    // Easy template class to quickly create a module
-    template <typename T>
-    class easy_command : public command {
-    public:
-        inline static T instance{};
-    };
 }
 
 #endif //JUNO_MODULE_HPP

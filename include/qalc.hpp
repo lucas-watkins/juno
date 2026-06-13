@@ -6,10 +6,10 @@
 #include <libqalculate/qalculate.h>
 
 namespace juno {
-    class qalc : public easy_command<qalc> {
+    class qalc : public command {
         std::unique_ptr<Calculator> m_calculator{ std::make_unique<Calculator>() };
 
-
+    public:
         constexpr std::string name() const override {
             return "qalc";
         }

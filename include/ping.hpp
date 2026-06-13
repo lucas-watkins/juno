@@ -4,7 +4,8 @@
 #include <command.hpp>
 
 namespace juno {
-    class ping : public easy_command<ping> {
+    class ping : public command {
+    public:
         constexpr std::string name() const override {
             return "ping";
         }
