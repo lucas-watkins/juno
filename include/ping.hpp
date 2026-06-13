@@ -1,10 +1,10 @@
 #ifndef JUNO_PINGPONG_HPP
 #define JUNO_PINGPONG_HPP
 
-#include <module.hpp>
+#include <command.hpp>
 
 namespace juno {
-    class ping : public easy_module<ping> {
+    class ping : public easy_command<ping> {
         constexpr std::string name() const override {
             return "ping";
         }

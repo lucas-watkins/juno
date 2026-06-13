@@ -5,10 +5,10 @@
 #ifndef JUNO_DEADLOCKVER_HPP
 #define JUNO_DEADLOCKVER_HPP
 
-#include <module.hpp>
+#include <command.hpp>
 
 namespace juno {
-    class deadlockversion : public easy_module<deadlockversion> {
+    class deadlockversion : public easy_command<deadlockversion> {
     public:
         constexpr std::string name() const override {
             return "deadlockversion";

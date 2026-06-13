@@ -4,8 +4,8 @@
 #include <dpp/dpp.h>
 
 namespace juno {
-    // Defines a module, being the information necessary for a command.
-    class module {
+    // Defines a command which is explicitly triggered by the user
+    class command {
     public:
 
         // Command registration
@@ -14,12 +14,12 @@ namespace juno {
 
         constexpr virtual std::string name() const = 0;
 
-        virtual ~module() = default;
+        virtual ~command() = default;
     };
 
     // Easy template class to quickly create a module
     template <typename T>
-    class easy_module : public module {
+    class easy_command : public command {
     public:
         inline static T instance{};
     };

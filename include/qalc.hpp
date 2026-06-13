@@ -2,11 +2,11 @@
 #define JUNO_QALC_HPP
 
 #include <memory>
-#include <module.hpp>
+#include <command.hpp>
 #include <libqalculate/qalculate.h>
 
 namespace juno {
-    class qalc : public easy_module<qalc> {
+    class qalc : public easy_command<qalc> {
         std::unique_ptr<Calculator> m_calculator{ std::make_unique<Calculator>() };
 
 

@@ -48,17 +48,19 @@ namespace juno {
         if (const auto opts{ cmd.get_command_interaction().options }; !opts.empty()) {
             std::cout << " with options: \n";
 
-            for (const auto& option : opts) {
-                std::cout << std::setw(53 /* len of date and level */ + option.name.size()) << option.name << " -> ";
+            for (auto option{ opts.cbegin() }; option != opts.cend(); ++option) {
+                std::cout << std::setw(53 /* len of date and level */ + option->name.size()) << option->name << " -> ";
 
-                if (const std::optional v{ juno::util::variant_to_string(option.value) }) {
-                    std::cout << *v << '\n';
+                if (const std::optional v{ juno::util::variant_to_string(option->value) }) {
+                    std::cout << *v;
                 } else {
-                    std::cout << "[null value]\n";
+                    std::cout << "[null value]";
+                }
+
+                if (option < opts.cend() - 1) {
+                    std::cout << '\n';
                 }
             }
-        } else {
-            std::cout << '\n';
         }
 
         return l;

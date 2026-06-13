@@ -1,6 +1,4 @@
 #include <iostream>
-#include <ctime>
-#include <cstdint>
 #include <vector>
 #include <dpp/dpp.h>
 #include <dpp/nlohmann/json.hpp>
@@ -32,7 +30,7 @@ int main() {
     dpp::cluster cluster{ token };
 
     // The modules that will be utilized for the bot
-    std::vector<juno::module*> modules{
+    std::vector<juno::command*> cmds{
         &juno::ping::instance,
         &juno::qalc::instance,
         &juno::cat::instance,
@@ -40,13 +38,12 @@ int main() {
     };
 
     cluster.on_slashcommand([&](const dpp::slashcommand_t& event) {
-        // operator<< for dpp::slashcommand_t handles newlines itself
-        juno::log << juno::logging::loglevel::info << ' ' << event;
+        juno::log << juno::logging::loglevel::info << ' ' << event << '\n';
 
-        for (const auto& module : modules) {
-            if (event.command.get_command_name() == module->name()) {
+        for (const auto& cmd : cmds) {
+            if (event.command.get_command_name() == cmd->name()) {
                 try {
-                    module->on_command_execution(event, cluster);
+                    cmd->on_command_execution(event, cluster);
                 } catch (const std::exception& ex) {
                     event.reply(juno::util::log_and_error_embed("Exception Occurred!", ex.what()));
                 }
@@ -61,21 +58,21 @@ int main() {
 
             juno::log << juno::logging::loglevel::info << " Connected to Discord\n";
 
-            std::vector<dpp::slashcommand> commands{};
-            commands.reserve(modules.size()); // approx guess
+            std::vector<dpp::slashcommand> cmds_bath_for_post{};
+            cmds_bath_for_post.reserve(cmds.size()); // approx guess
 
 
-            for (const auto& module : modules) {
-                commands.emplace_back(module->make_command(cluster));
+            for (const auto& cmd : cmds) {
+                cmds_bath_for_post.emplace_back(cmd->make_command(cluster));
             }
 
-            cluster.global_bulk_command_create(commands);
+            cluster.global_bulk_command_create(cmds_bath_for_post);
             //cluster.guild_bulk_command_create(commands, 1504533559212249179);
 
-            juno::log << juno::logging::loglevel::info << ' ' << modules.size() << " modules loaded (";
-            for (int i{ 0 }; i < modules.size(); ++i) {
-                juno::log << modules[i]->name();
-                if (i < modules.size() - 1) {
+            juno::log << juno::logging::loglevel::info << ' ' << cmds.size() << " commands loaded (";
+            for (int i{ 0 }; i < cmds.size(); ++i) {
+                juno::log << cmds[i]->name();
+                if (i < cmds.size() - 1) {
                     juno::log << ", ";
                 }
             }

@@ -5,11 +5,11 @@
 #ifndef JUNO_CATS_HPP
 #define JUNO_CATS_HPP
 
-#include <module.hpp>
+#include <command.hpp>
 
 namespace juno {
     // Gets cat images from cat as a service (https://cataas.com)
-    class cat : public easy_module<cat> {
+    class cat : public easy_command<cat> {
         // Respond to http request to service
         static void post_image_to_channel(const dpp::slashcommand_t& event, const dpp::http_request_completion_t& req);
 
