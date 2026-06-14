@@ -11,7 +11,7 @@ dpp::slashcommand juno::deadlockversion::make_command(dpp::cluster& cluster) con
         );
 }
 
-void juno::deadlockversion::on_command_execution(const dpp::slashcommand_t& event, dpp::cluster& cluster) const {
+void juno::deadlockversion::on_command_execution(const dpp::slashcommand_t& event, dpp::cluster& cluster) {
     const std::string platform{ std::get<std::string>(event.get_parameter("platform")) };
 
     auto send_error = [](const dpp::slashcommand_t& e, const int httpstatus) {

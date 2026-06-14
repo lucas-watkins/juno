@@ -9,7 +9,7 @@ dpp::slashcommand juno::cat::make_command(dpp::cluster& cluster) const {
         );
 }
 
-void juno::cat::on_command_execution(const dpp::slashcommand_t& event, dpp::cluster& cluster) const {
+void juno::cat::on_command_execution(const dpp::slashcommand_t& event, dpp::cluster& cluster) {
     const auto cb = [event](const dpp::http_request_completion_t& r) { post_image_to_channel(event, r); };
 
     const dpp::command_value says_param{ event.get_parameter("says") };
