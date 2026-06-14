@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <filesystem>
 #include <dpp/dpp.h>
 #include <dpp/nlohmann/json.hpp>
 #include <config.hpp>
@@ -14,13 +15,19 @@ int main() {
 
     try {
         std::ifstream ifs{ "config.json" };
+
+        if (!std::filesystem::exists("config.json") || ifs.bad()) {
+            juno::log << juno::logging::loglevel::error << " config.json not found! Exiting...\n";
+            return 0;
+        }
+
         nlohmann::json json_config(nlohmann::json::parse(ifs));
 
         juno::config config{ json_config.get<juno::config>() };
 
         token = config.token();
     } catch (const std::exception& e) {
-        std::cerr << "Retrieval of config failed: " << e.what() << '\n';
+        juno::log << juno::logging::loglevel::error << " Retrieval of config failed: " << e.what() << " Exiting...\n";
 
         return 0;
     }
