@@ -1,7 +1,3 @@
-//
-// Created by lucas on 5/29/26.
-//
-
 #ifndef JUNO_DEADLOCKVER_HPP
 #define JUNO_DEADLOCKVER_HPP
 

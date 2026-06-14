@@ -1,7 +1,3 @@
-//
-// Created by lucas on 5/23/26.
-//
-
 #ifndef JUNO_LOGGING_HPP
 #define JUNO_LOGGING_HPP
 

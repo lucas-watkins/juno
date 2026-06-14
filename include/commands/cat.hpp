@@ -1,7 +1,3 @@
-//
-// Created by lucas on 5/24/26.
-//
-
 #ifndef JUNO_CATS_HPP
 #define JUNO_CATS_HPP
 
