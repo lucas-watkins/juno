@@ -8,10 +8,27 @@
 #include <dpp/dpp.h>
 
 namespace juno {
-    // Forward declaration
-    namespace util {
-        template <typename... Ts>
-        std::optional<std::string> variant_to_string(const std::variant<Ts...>& v);
+    /*
+    * Returns optional string to get type from variant as long as it's stream insertable.
+    * When a monostate is encountered, function returns std::nullopt
+    */
+    template <typename... Ts>
+    std::optional<std::string> variant_to_string(const std::variant<Ts...>& v) {
+        std::stringstream ss{};
+
+        ([&] {
+            if (std::holds_alternative<Ts>(v)) {
+                if constexpr (!std::is_same_v<Ts, std::monostate>) {
+                    ss << std::get<Ts>(v);
+                }
+            }
+        }(), ...);
+
+        if (!ss.view().empty()) {
+            return ss.str();
+        }
+
+        return std::nullopt;
     }
 
     // Juno's logging always goes to standard output
@@ -31,7 +48,7 @@ namespace juno {
     };
 
     // log instance
-    inline logging log{};
+    inline logging global_log{};
 
     template <typename T>
     [[jetbrains::has_side_effects]] const juno::logging& operator<<(const juno::logging& l, const T& t) {
@@ -51,7 +68,7 @@ namespace juno {
             for (auto option{ opts.cbegin() }; option != opts.cend(); ++option) {
                 std::cout << std::setw(53 /* len of date and level */ + option->name.size()) << option->name << " -> ";
 
-                if (const std::optional v{ juno::util::variant_to_string(option->value) }) {
+                if (const std::optional v{ variant_to_string(option->value) }) {
                     std::cout << *v;
                 } else {
                     std::cout << "[null value]";
