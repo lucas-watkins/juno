@@ -1,6 +1,9 @@
 #ifndef JUNO_LOGGING_HPP
 #define JUNO_LOGGING_HPP
 
+// For ignoring compiler errors caused by the jetbrains attribute below
+#pragma GCC diagnostic ignored "-Wattributes"
+
 #include <optional>
 #include <dpp/dpp.h>
 
