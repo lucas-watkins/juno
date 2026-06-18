@@ -34,8 +34,12 @@ void juno::deadlockversion::on_command_execution(const dpp::slashcommand_t& even
 
                 try {
                     nlohmann::json j(nlohmann::json::parse(req.body));
-                    const std::size_t min_allowed_version{ j["result"]["min_allowed_version"].get<std::size_t>() };
-                    const std::size_t active_version{ j["result"]["active_version"].get<std::size_t>() };
+
+                    const std::size_t min_allowed_version{
+                        j.at("result").at("min_allowed_version").get<std::size_t>()
+                    };
+
+                    const std::size_t active_version{ j.at("result").at("active_version").get<std::size_t>() };
 
                     const dpp::embed resp = dpp::embed{}
                         .add_field("Minimum Allowed Version", std::to_string(min_allowed_version))
@@ -58,10 +62,10 @@ void juno::deadlockversion::on_command_execution(const dpp::slashcommand_t& even
 
                 try {
                     nlohmann::json j(nlohmann::json::parse(req.body));
-                    const std::size_t engine{ j["result"]["engine"].get<std::size_t>() };
-                    const std::size_t deploy_version{ j["result"]["deploy_version"].get<std::size_t>() };
-                    const std::size_t active_version{ j["result"]["active_version"].get<std::size_t>() };
-                    const std::size_t response_time{ j["result"]["response_time"].get<std::size_t>() };
+                    const std::size_t engine{ j.at("result").at("engine").get<std::size_t>() };
+                    const std::size_t deploy_version{ j.at("result").at("deploy_version").get<std::size_t>() };
+                    const std::size_t active_version{ j.at("result").at("active_version").get<std::size_t>() };
+                    const std::size_t response_time{ j.at("result").at("response_time").get<std::size_t>() };
 
                     const dpp::embed resp = dpp::embed{}
                         .add_field("Engine", std::to_string(engine))
