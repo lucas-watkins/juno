@@ -4,6 +4,7 @@
 #include <command.hpp>
 
 namespace juno {
+    // Classic ping/pong command to test bot
     class ping : public command {
     public:
         std::string name() const override {

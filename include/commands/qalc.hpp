@@ -6,6 +6,7 @@
 #include <libqalculate/qalculate.h>
 
 namespace juno {
+    // Wraps libqalculate in an easy to access discord command
     class qalc : public command {
         std::unique_ptr<Calculator> m_calculator{ std::make_unique<Calculator>() };
 

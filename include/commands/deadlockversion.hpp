@@ -4,6 +4,7 @@
 #include <command.hpp>
 
 namespace juno {
+    // Query some wierd Valve API which gives info on deadlock
     class deadlockversion : public command {
     public:
         std::string name() const override {
