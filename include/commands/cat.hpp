@@ -10,7 +10,7 @@ namespace juno {
         static void post_image_to_channel(const dpp::slashcommand_t& event, const dpp::http_request_completion_t& req);
 
     public:
-        constexpr std::string name() const override {
+        std::string name() const override {
             return "cat";
         }
 

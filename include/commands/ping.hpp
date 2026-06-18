@@ -6,7 +6,7 @@
 namespace juno {
     class ping : public command {
     public:
-        constexpr std::string name() const override {
+        std::string name() const override {
             return "ping";
         }
 

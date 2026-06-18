@@ -10,7 +10,7 @@ namespace juno {
         std::unique_ptr<Calculator> m_calculator{ std::make_unique<Calculator>() };
 
     public:
-        constexpr std::string name() const override {
+        std::string name() const override {
             return "qalc";
         }
 
