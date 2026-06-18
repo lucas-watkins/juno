@@ -5,8 +5,6 @@
 
 bool juno::languagebarrier::should_filter(const dpp::message_create_t& message, dpp::cluster& cluster) const {
     for (const auto& r : m_regexes) {
-        const std::string& content{ message.msg.content };
-
         if (std::regex_search(message.msg.content, r)) {
             return true;
         }
